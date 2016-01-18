@@ -158,7 +158,25 @@ public class StringList {
     // Note: l.get(0) delivers the 1st element of the list (if there is one)
     //
 
-    public Node last(){return null;}
+    public Node last(){
+
+        if (this.size() == 0) return null;
+
+        Node currentNode = this.getHead();
+        if (this.size() == 1 ) return currentNode;
+
+        if (this.size() > 1){
+            long j = this.size();
+
+            while (j > 0 ){
+                currentNode = currentNode.getNext();
+                j=j-1;
+            }
+
+            
+        } 
+        return currentNode;
+    }
     // IMPLEMENT THIS
     //
     // l.last() delivers the last Node in the list l.
