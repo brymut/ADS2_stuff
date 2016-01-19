@@ -276,10 +276,40 @@ public class StringList {
     // the index of the first occurrence of s in the list
     //
 
-    public void replace(String s1,String s2){}
-    // IMPLEMENT ME
+
+
+    public void replaceFirst(String s, String t){
+
+        Node currentNode = head;
+
+        while( currentNode != null){
+            String currentElement = currentNode.getElement();
+
+            if ((currentElement.compareTo(s)) == 0) currentNode.setElement(t);
+
+            currentNode = currentNode.getNext();
+
+
+        }
+
+    }
+
+
+    public void replace(String s1,String s2){
+
+
+        while (this.isPresent(s1)){
+
+            replaceFirst(s1,s2);
+        
+    }
+    }
     //
     // replace all occurrences of s1 with s2
     // NOTE: you need to use setElement
     //
+
+
+
+
 }
