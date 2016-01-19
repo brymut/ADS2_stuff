@@ -139,11 +139,18 @@ public class StringList {
     
     public StringList reverse(){
 
+        Node currentNode = this.getHead();
+        StringList reverseList = new StringList();
 
+        while( currentNode != null){
 
+            reverseList.addFront(currentNode.getElement());
+            currentNode = currentNode.getNext();
 
+        }            
+        
 
-        return new StringList();}
+        return reverseList;}
     // IMPLEMENT THIS
     //
     // l.reverse() delivers a new StringList that has the 
