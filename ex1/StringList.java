@@ -222,9 +222,28 @@ public class StringList {
     public int count(String s){
 
 
+        int count = 0;
+        Node currentNode = this.getHead();
+        int currentIndex = 0;
+
+        while ( currentIndex != size  ){
+
+        
+            String element = currentNode.getElement();
 
 
-        return -1;}
+            if( (element.compareTo(s) == 0)) count++ ;
+
+
+            currentNode = currentNode.getNext();
+            currentIndex++ ;
+
+
+        }
+
+       
+
+        return count;}
     // IMPLEMENT THIS
     //
     // l.count(s) returns the number of times s occurs in l
