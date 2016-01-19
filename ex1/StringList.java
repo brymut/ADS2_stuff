@@ -150,7 +150,19 @@ public class StringList {
     // the elements of l in reverse order
     //
     
-    public String get(int i){return "IMPLEMENT THIS";}
+    public String get(int i){
+
+
+        if (this.size() == 0) return "Unable to retrieve, this is an empty list";
+
+        
+
+        
+
+
+
+
+        return "IMPLEMENT THIS";}
     // IMPLEMENT THIS
     //
     // l.get(i) delivers a String s, the ith element of list l.
