@@ -111,30 +111,24 @@ public class StringList {
         }else{
             Node currentNodel1 = head;
             Node currentNodel2 = l.head;
-            boolean notEqual = false;
+            boolean Equal = false;
             long i = l.size;
             long j = 0;
 
-            while(notEqual == false && (j<i)){
+            while(!Equal && (j<i)){
                 String element1 = currentNodel1.getElement();
                 String element2 = currentNodel2.getElement();
 
-                notEqual = element1.equals(element2);
+                Equal = element1.equals(element2);
                 currentNodel2 = currentNodel2.getNext();
                 currentNodel1 = currentNodel1.getNext();
                 j++;
             }
 
-            return notEqual;
+            return Equal;
 
         }
-
-
-
-
-
-
-        }
+    }
     // IMPLEMENT THIS
     //
     // l1.equals(l2) delivers true if the two lists
@@ -143,14 +137,35 @@ public class StringList {
 
 
     
-    public StringList reverse(){return new StringList();}
+    public StringList reverse(){
+
+
+
+
+
+        return new StringList();}
     // IMPLEMENT THIS
     //
     // l.reverse() delivers a new StringList that has the 
     // the elements of l in reverse order
     //
     
-    public String get(int i){return "IMPLEMENT THIS";}
+    public String get(int i){
+
+        if (i < 0) return "cannot return element in a negative position";
+        if (i >= (int)size) return "cannot return the element requested, too high";
+
+        Node currentNode  = this.getHead();
+  
+        int pos = 0;
+
+        while ( pos != i   ) {
+            currentNode = currentNode.getNext();
+            pos++;
+        }
+
+        return currentNode.getElement();
+    }
     // IMPLEMENT THIS
     //
     // l.get(i) delivers a String s, the ith element of list l.
@@ -183,7 +198,12 @@ public class StringList {
     // Note: this might be used when appending lists
     //
     
-    public void append(StringList l){}
+    public void append(StringList l){
+
+
+
+
+    }
     // IMPLEMENT THIS
     //
     // l1.append(l2) append list l2 to the end of list l1.
@@ -192,13 +212,38 @@ public class StringList {
     //       You should investigate the consequences of this
     //
 
-    public int count(String s){return -1;}
+    public int count(String s){
+
+
+
+
+        return -1;}
     // IMPLEMENT THIS
     //
     // l.count(s) returns the number of times s occurs in l
     //
 
-    public int indexOf(String s){return -999;}
+    public int indexOf(String s){
+
+        
+        Node currentNode = this.getHead();
+
+        int currentPos = 0;
+        
+        for (int i = 0 ; i < size  ; i++ ) {
+
+            
+            String currentElement = currentNode.getElement();
+            if((currentElement.compareTo(s)) == 0 ) return currentPos;
+
+            currentNode = currentNode.getNext();
+            currentPos++;
+
+            
+        }
+        return -1;
+
+    }
     // IMPLEMENT THIS
     //
     // indexOf(s) returns -1 if s is not in the list, otherwise
