@@ -182,12 +182,12 @@ public class StringList {
 
     public Node last(){
 
-        if (this.size() == 0) return null;
+        if (size == 0) return null;
 
         Node currentNode = this.getHead();
-        if (this.size() == 1 ) return currentNode;
+        if (size == 1 ) return currentNode;
 
-        if (this.size() > 1){
+        if (size > 1){
             long j = this.size();
 
             while (j > 0 ){
@@ -207,8 +207,16 @@ public class StringList {
     
     public void append(StringList l){
 
+        Node currentNode = getHead();
+
+        while (currentNode.getNext() != null){
+
+            currentNode = currentNode.getNext();
+        }
 
 
+        currentNode.setNext(l.getHead());
+        
 
     }
     // IMPLEMENT THIS
@@ -252,7 +260,7 @@ public class StringList {
     public int indexOf(String s){
 
         
-        Node currentNode = this.getHead();
+        Node currentNode = getHead();
 
         int currentPos = 0;
         
