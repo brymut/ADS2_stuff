@@ -103,6 +103,13 @@ public class StringList {
     //    - replace
     //
 
+
+
+
+    //
+    // l1.equals(l2) delivers true if the two lists
+    // contain the same elements in the same order
+    //
     public boolean equal(StringList l){
 
 
@@ -129,13 +136,13 @@ public class StringList {
 
         }
     }
-    // IMPLEMENT THIS
-    //
-    // l1.equals(l2) delivers true if the two lists
-    // contain the same elements in the same order
-    //
+    
 
-
+  
+    //
+    // l.reverse() delivers a new StringList that has the 
+    // the elements of l in reverse order
+    //
     
     public StringList reverse(){
 
@@ -151,12 +158,14 @@ public class StringList {
         
 
         return reverseList;}
-    // IMPLEMENT THIS
-    //
-    // l.reverse() delivers a new StringList that has the 
-    // the elements of l in reverse order
-    //
-    
+
+
+
+//
+    // l.get(i) delivers a String s, the ith element of list l.
+    // If i is negative or i is greater than or equal to l.size() deliver ""
+    // Note: l.get(0) delivers the 1st element of the list (if there is one)
+    //    
     public String get(int i){
 
         if (i < 0) return "cannot return element in a negative position";
@@ -173,12 +182,13 @@ public class StringList {
 
         return currentNode.getElement();
     }
-    // IMPLEMENT THIS
+    
+
+//
+    // l.last() delivers the last Node in the list l.
+    // Note: this might be used when appending lists
     //
-    // l.get(i) delivers a String s, the ith element of list l.
-    // If i is negative or i is greater than or equal to l.size() deliver ""
-    // Note: l.get(0) delivers the 1st element of the list (if there is one)
-    //
+        
 
     public Node last(){
 
@@ -199,12 +209,14 @@ public class StringList {
         } 
         return currentNode;
     }
-    // IMPLEMENT THIS
-    //
-    // l.last() delivers the last Node in the list l.
-    // Note: this might be used when appending lists
-    //
-    
+   
+//
+    // l1.append(l2) append list l2 to the end of list l1.
+    // Note: this operation modifies l1, such that the last
+    //       Node in l1 points to the head of l2.
+    //       You should investigate the consequences of this
+    //    
+
     public void append(StringList l){
 
         Node currentNode = getHead();
@@ -219,14 +231,11 @@ public class StringList {
         
 
     }
-    // IMPLEMENT THIS
+    
+    
+ //
+    // l.count(s) returns the number of times s occurs in l
     //
-    // l1.append(l2) append list l2 to the end of list l1.
-    // Note: this operation modifies l1, such that the last
-    //       Node in l1 points to the head of l2.
-    //       You should investigate the consequences of this
-    //
-
     public int count(String s){
 
 
@@ -235,26 +244,20 @@ public class StringList {
         int currentIndex = 0;
 
         while ( currentIndex != size  ){
-
         
             String element = currentNode.getElement();
 
-
             if( (element.compareTo(s) == 0)) count++ ;
-
-
             currentNode = currentNode.getNext();
             currentIndex++ ;
 
-
         }
-
-       
-
         return count;}
-    // IMPLEMENT THIS
-    //
-    // l.count(s) returns the number of times s occurs in l
+
+    
+//
+    // indexOf(s) returns -1 if s is not in the list, otherwise
+    // the index of the first occurrence of s in the list
     //
 
     public int indexOf(String s){
@@ -278,13 +281,8 @@ public class StringList {
         return -1;
 
     }
-    // IMPLEMENT THIS
-    //
-    // indexOf(s) returns -1 if s is not in the list, otherwise
-    // the index of the first occurrence of s in the list
-    //
-
-
+    
+// replace first occurence of String s with String t    
 
     public void replaceFirst(String s, String t){
 
@@ -301,7 +299,9 @@ public class StringList {
         }
 
     }
-
+//
+    // replace all occurrences of s1 with s2
+    //
 
     public void replace(String s1,String s2){
 
@@ -312,10 +312,7 @@ public class StringList {
         
     }
     }
-    //
-    // replace all occurrences of s1 with s2
-    // NOTE: you need to use setElement
-    //
+    
 
 
 
