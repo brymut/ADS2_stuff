@@ -40,11 +40,12 @@ public class ArrayQueue<E> {
 	
     public void enqueue(E element) throws ArrayQueueException {
 
-        if (size == Q.length)  throw new ArrayQueueException("ArrayQueue is full!");
+        if (size >= n)  throw new ArrayQueueException("ArrayQueue is full!");
+        Q[rear] = element;
 
-        n = (front+size)% Q.length;
+        rear = (rear+1)% n;
 
-        Q[n] = element;
+        
         size++;
 
 
@@ -54,13 +55,13 @@ public class ArrayQueue<E> {
     
     public E dequeue() throws ArrayQueueException {
 
-        if (isEmpty()) return null;
+        if (isEmpty()) throw new ArrayQueueException("Unable to dequeue, queue is Empty");
 
         E firstElement = Q[front];
 
-        Q[front] = null;
+        
 
-        front = (front+1) % Q.length;
+        front++;
         size--;
 
         return firstElement;}
@@ -68,45 +69,20 @@ public class ArrayQueue<E> {
 
     public String toString(){
 
+        StringBuilder output = new StringBuilder();
+        output.append("[");
+        
+        for(int printIndex = 0; printIndex <= size-1; printIndex++){
 
-/*
+            output.append(Q[printIndex]); 
 
- if(isEmpty())return "the ArrayQueue is empty \n";
-
-        String output = "[";
-
-        while(front()!= null){
-
-            output = output + dequeue().toString();
-            output = output + ",";
+            if( printIndex <= size-2)output.append(",");
+            
 
         }
-
-        output = output + "]";
-
-
-
-
-*/
-
-
-
-
-
-
-        return "";
-
-
-
+        return output.append("]").toString();
 
     }
-    //
-    // IMPLEMENT ME
-    //
-    //
-    // NOTE: if the queue contains 1,2,3 then return "[1,2,3]"
-    //       if the queue contains 1 then return "[1]"
-    //       if the queue is empty return "[]"
-    //
+    
 }
 	
