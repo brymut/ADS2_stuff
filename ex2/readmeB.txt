@@ -1,6 +1,4 @@
 
-                    Exercise 2: QueueSort<E>
-                    -------------------------
 
 
 Description:

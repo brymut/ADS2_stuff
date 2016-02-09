@@ -45,7 +45,6 @@ public class ArrayQueue<E> {
 
         rear = (rear+1)% n;
 
-        
         size++;
 
 
@@ -59,8 +58,6 @@ public class ArrayQueue<E> {
 
         E firstElement = Q[front];
 
-        
-
         front++;
         size--;
 
@@ -72,13 +69,10 @@ public class ArrayQueue<E> {
         StringBuilder output = new StringBuilder();
         output.append("[");
         
-        for(int printIndex = 0; printIndex <= size-1; printIndex++){
+        for(int printIndex = 0 ; printIndex < size; printIndex++){
 
-            output.append(Q[printIndex]); 
-
-            if( printIndex <= size-2)output.append(",");
+            output.append(Q[front+printIndex]); 
             
-
         }
         return output.append("]").toString();
 
