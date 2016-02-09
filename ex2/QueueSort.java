@@ -23,77 +23,36 @@ public class QueueSort<E extends Comparable<E>>  {
 
     private ArrayQueue<E> merge(ArrayQueue<E> q1,ArrayQueue<E> q2) throws ArrayQueueException {
 
-        ArrayQueue<E> qNew = new ArrayQueue<E>();
-        int sizeDiff = q1.size() - q2.size();
-
-        if (sizeDiff == 0) {
-
-            for(int currentCompareIndex = 0 ; currentCompareIndex < q1.size(); currentCompareIndex++){
-
-                if(q1.front().compareTo(q2.front()) >= 0){
-
-                    qNew.enqueue(q1.dequeue());
-                    qNew.enqueue(q2.dequeue());
-                } 
-               // if(q2.front().compareTo(q1.front()) >= 0)//
-               else {
-                    qNew.enqueue(q2.dequeue()); 
-                    qNew.enqueue(q1.dequeue());
-                    }       
-            
-            }
-
-        if (sizeDiff < 0) {
-
-            for(int currentCompareIndex = 0 ; currentCompareIndex < q1.size(); currentCompareIndex++){
-
-                if(q1.front().compareTo(q2.front()) >= 0){
-
-                    qNew.enqueue(q1.dequeue());
-                    qNew.enqueue(q2.dequeue());
-                } 
-                if(q2.front().compareTo(q1.front()) >= 0) {
-                    qNew.enqueue(q2.dequeue()); 
-                    qNew.enqueue(q1.dequeue());
-                    }       
-            
-            }
-
-            while(q2.size() > 0){
-                qNew.enqueue(q2.dequeue());
-            }
+        ArrayQueue<E> qNew = new ArrayQueue<E>(q1.size()+q2.size());
 
 
-            
+        while((q1.size() >0) && (q2.size() > 0)){
+
+            if(q1.front().compareTo(q2.front()) <= 0) qNew.enqueue(q1.dequeue());
+            else qNew.enqueue(q2.dequeue());
+
+
         }
 
-        if (sizeDiff > 0) {
+        if(!q1.isEmpty() ){
 
-            for(int currentCompareIndex = 0 ; currentCompareIndex < q2.size(); currentCompareIndex++){
-
-                if(q1.front().compareTo(q2.front()) >= 0){
-
-                    qNew.enqueue(q1.dequeue());
-                    qNew.enqueue(q2.dequeue());
-                } 
-                if(q2.front().compareTo(q1.front()) >= 0) {
-                    qNew.enqueue(q2.dequeue()); 
-                    qNew.enqueue(q1.dequeue());
-                    }       
-            
-            }
-
-            while(q1.size() > 0){
+            for ( int i = 0; i < q1.size();i++) {
                 qNew.enqueue(q1.dequeue());
+
+            }
+
+        }
+
+        if (!q2.isEmpty() ) {
+            
+            for ( int i = 0; i < q2.size();i++) {
+                qNew.enqueue(q2.dequeue());
+
             }
 
 
-            
         }
-
-
-
-        }
+       
 
         return qNew;
     }
@@ -104,17 +63,15 @@ public class QueueSort<E extends Comparable<E>>  {
     //
 
     public void sort(){
-        int counter = 0;
+        System.out.println(Q.size());
         while (Q.size() > 1) {
-            
-            counter++;
+            System.out.println(Q.toString()); 
 
-            ArrayQueue<E> QNew = new ArrayQueue<E>();
 
-            QNew = merge(Q.dequeue(),Q.dequeue());
 
-            Q.enqueue(QNew);
-            System.out.println(Q.toString());
+
+            Q.enqueue(merge(Q.dequeue(),Q.dequeue()));
+
 
         }
 
