@@ -65,9 +65,12 @@ public class QueueSort<E extends Comparable<E>>  {
     public void sort(){
         System.out.println(Q.size());
         while (Q.size() > 1) {
-            System.out.println(Q.toString());            
+            System.out.println(Q.toString()); 
+
+
+
+
             Q.enqueue(merge(Q.dequeue(),Q.dequeue()));
-           // System.out.println(Q.toString());
 
 
         }
