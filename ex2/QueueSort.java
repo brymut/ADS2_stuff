@@ -23,13 +23,13 @@ public class QueueSort<E extends Comparable<E>>  {
 
     private ArrayQueue<E> merge(ArrayQueue<E> q1,ArrayQueue<E> q2) throws ArrayQueueException {
 
-        ArrayQueue<E> qNew = new ArrayQueue<E>(q1.size()+q2.size());
+        ArrayQueue<E> q3 = new ArrayQueue<E>(q1.size()+q2.size());
 
 
-        while((q1.size() >0) && (q2.size() > 0)){
+        while((!q1.isEmpty()) && (!q2.isEmpty())){
 
-            if(q1.front().compareTo(q2.front()) <= 0) qNew.enqueue(q1.dequeue());
-            else qNew.enqueue(q2.dequeue());
+            if(q1.front().compareTo(q2.front()) < 0) q3.enqueue(q1.dequeue());
+            else q3.enqueue(q2.dequeue());
 
 
         }
@@ -37,16 +37,16 @@ public class QueueSort<E extends Comparable<E>>  {
         if(!q1.isEmpty() ){
 
             for ( int i = 0; i < q1.size();i++) {
-                qNew.enqueue(q1.dequeue());
+                q3.enqueue(q1.dequeue());
 
             }
 
         }
 
-        if (!q2.isEmpty() ) {
+        if (!q2.isEmpty() ){
             
             for ( int i = 0; i < q2.size();i++) {
-                qNew.enqueue(q2.dequeue());
+                q3.enqueue(q2.dequeue());
 
             }
 
@@ -54,26 +54,20 @@ public class QueueSort<E extends Comparable<E>>  {
         }
        
 
-        return qNew;
+        return q3;
     }
-    //
-    // IMPLEMENT ME
-    // Take two sorted queues and merge them to produce a third
-    // sorted queue
-    //
+    
+    
 
     public void sort(){
-        System.out.println(Q.size());
+
+
         while (Q.size() > 1) {
-            System.out.println(Q.toString()); 
 
-
-
-
-            Q.enqueue(merge(Q.dequeue(),Q.dequeue()));
-
-
-        }
+           
+           Q.enqueue(merge(Q.dequeue(),Q.dequeue()));
+           
+         }
 
 
 
