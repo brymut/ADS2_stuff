@@ -1,6 +1,14 @@
 import java.util.*;
 import java.io.*;
 
+
+/**
+ * @author Bryan Mutai 2131791
+ * ADS2 Exercise 2: assessed
+ *Build a circular queue and then use it for sorting
+ *
+ */
+
 public class ArrayQueue<E> {
 
     //instance variables
