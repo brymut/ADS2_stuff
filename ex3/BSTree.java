@@ -81,9 +81,10 @@ public class BSTree {
 
 
         if (node == null) return null;
-        else if (s.compareTo(node.getElement()) < 0) find(s,node.getLeft());
-        else if (s.compareTo(node.getElement()) > 0) find(s,node.getRight());
+        else if (s.compareTo(node.getElement()) < 0) return find(s,node.getLeft());
+        else if (s.compareTo(node.getElement()) > 0) return find(s,node.getRight());
         return node;
+        
         
     }
     //
@@ -103,13 +104,10 @@ public class BSTree {
 
     private int height(Node node){
 
-        int h = 0;
-        if(node == null) h = h-1  ;
-        else h = 1 + height(node.getLeft()) + height(node.getRight());
+        return -1;
+        }
 
-        return h;
-
-    }
+    
     //
     // if the node is null then its height is -1
     // otherwise the height is 1 plus the maximum of the height on the left
@@ -185,7 +183,22 @@ public class BSTree {
 
     public void bfs(){bfs(root);}
 
-    private void bfs(Node node){}
+    private void bfs(Node node){
+
+        ArrayQueue<Node> Q = new ArrayQueue<>();
+        Q.enqueue(node);
+        while(!Q.isEmpty()){
+            Node firstNode = Q.dequeue();
+            System.out.println(firstNode.toString());
+            if(firstNode.hasLeft())Q.enqueue(firstNode.getLeft());
+            if(firstNode.hasRight())Q.enqueue(firstNode.getRight());
+        }
+
+
+
+
+
+    }
     //
     // breadth first search visits all nodes at depth 0, then all at depth 1
     // then all at depth 2, then ...
@@ -200,7 +213,22 @@ public class BSTree {
 
     public void dfs(){dfs(root);}
 
-    private void dfs(Node node){}
+    private void dfs(Node node){
+
+        Stack<Node> S = new Stack<>();
+        S.push(node);
+        while(!S.empty()){
+
+            Node firstNode = S.pop();
+            System.out.println(firstNode.getElement());
+            if(firstNode.hasLeft())S.push(firstNode.getLeft());
+            if(firstNode.hasRight())S.push(firstNode.getRight());
+
+
+        }
+
+
+    }
     //
     // depth first search is sames as breadth first search but uses a stack!
     //
