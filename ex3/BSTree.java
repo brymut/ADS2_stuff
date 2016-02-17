@@ -69,8 +69,7 @@ public class BSTree {
     //          set the right child of the current node be the newNode 
     //          increment the size
     //
-    // NOTE: above ensure that entries that aleardy exist are not duplicated (the tree is a set)
-    //
+   
 
 
     public boolean isPresent(String s){return find(s,root)!= null;}
@@ -82,11 +81,10 @@ public class BSTree {
 
 
         if (node == null) return null;
-        if (s.compareTo(node.getElement()) < 0) find(s,node.getLeft());
-        if (s.compareTo(node.getElement()) > 0) find(s,node.getRight());
-
+        else if (s.compareTo(node.getElement()) < 0) find(s,node.getLeft());
+        else if (s.compareTo(node.getElement()) > 0) find(s,node.getRight());
         return node;
-
+        
     }
     //
     // given a node and a string s, deliver a Node with element equal to s or deliver null
@@ -106,7 +104,7 @@ public class BSTree {
     private int height(Node node){
 
         int h = 0;
-        if(node == null) h = -1  ;
+        if(node == null) h = h-1  ;
         else h = 1 + height(node.getLeft()) + height(node.getRight());
 
         return h;
@@ -120,7 +118,19 @@ public class BSTree {
 
     public void preorder(){preorder(root);}
     
-    private void preorder(Node node){}
+    private void preorder(Node node){
+
+        if (node != null) {
+
+            System.out.println(node.getElement().toString());
+            preorder(node.getLeft());
+            preorder(node.getRight());
+            
+
+        }
+        
+
+    }
     //
     // if the node isn't null
     // print out the contents of the nodes in preorder
@@ -130,7 +140,20 @@ public class BSTree {
 
     public void inorder(){inorder(root);}
     
-    private void inorder(Node node){}
+    private void inorder(Node node){
+
+        if (node != null) {
+
+            inorder(node.getLeft());
+            System.out.println(node.getElement().toString());
+            inorder(node.getRight());
+            
+        }
+        
+
+
+
+    }
     //
     // if the node isn't null
     // inorder is inorder of left, followed by the node 
@@ -139,7 +162,21 @@ public class BSTree {
     
     public void postorder(){postorder(root);}
     
-    private void postorder(Node node){}
+    private void postorder(Node node){
+
+
+       if (node != null) {
+
+
+        postorder(node.getLeft());
+        postorder(node.getRight());
+        System.out.println(node.getElement().toString());
+           
+       }
+
+    }
+ 
+
     //
     // if the node isn't null
     // postorder is postorder of the left, followed by postorder right
