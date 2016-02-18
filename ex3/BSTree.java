@@ -219,10 +219,10 @@ public class BSTree {
         S.push(node);
         while(!S.empty()){
 
-            Node firstNode = S.pop();
-            System.out.println(firstNode.getElement());
-            if(firstNode.hasLeft())S.push(firstNode.getLeft());
-            if(firstNode.hasRight())S.push(firstNode.getRight());
+            Node topNode = S.pop();
+            System.out.println(topNode.getElement());
+            if(topNode.hasLeft())S.push(topNode.getLeft());
+            if(topNode.hasRight())S.push(topNode.getRight());
 
 
         }
