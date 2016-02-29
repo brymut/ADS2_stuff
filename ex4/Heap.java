@@ -28,12 +28,12 @@ public class Heap <E extends Comparable<E>> {
     
     public int size(){return last;}
     //
-    // returns the number of elements in the heap
+    // returns the number of elements in the heap using the value of last
     //
     
     public boolean isEmpty(){return (last==0);}
     //
-    // is the heap empty?
+    // is the heap empty? using the value of Last
     //
     
     @SuppressWarnings("unchecked")
@@ -56,7 +56,7 @@ public class Heap <E extends Comparable<E>> {
         H[last] = e;
         System.out.println((E) H[last]);
         System.out.println((E) H[last/2]);
-        System.out.println(((E) H[last]).compareTo((E) H[last/2]) < 0);
+        System.out.println(compare((E) H[last], (E) H[last/2]));
         
 
         //while( ((E) H[last]).compareTo((E) H[last/2]) < 0){
