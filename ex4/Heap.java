@@ -55,6 +55,17 @@ public class Heap <E extends Comparable<E>> {
         H[e2] = (E) temp;
         
     }
+
+    private boolean hasLeft(int e, Object H[]){
+
+        if ( ((E) H[2*e]) == null) return false;
+        else return true;
+    }
+    private boolean hasRight(int e, Object H[]){
+
+        if ( ((E) H[(2*e) + 1]) == null) return false;
+        else return true;
+    }
     
     public void insert(E e) throws HeapException {
 
@@ -74,7 +85,8 @@ public class Heap <E extends Comparable<E>> {
 
         last++;
 
-    }		
+    }
+
     //
     // inserts e into the heap
     // throws exception if heap overflow
@@ -83,20 +95,35 @@ public class Heap <E extends Comparable<E>> {
     @SuppressWarnings("unchecked")
     public E removeMin() throws HeapException {
 
-        if (H.isEmpty()){throw exception};
+
+        if (isEmpty()) throw new HeapException("underflow");
 
 	    E min =  (E) H[0];
 
-        H[0] = (E) H[last];
+        H[0] = (E) H[last-1];
 
-        j = 0;
-        while (j < last){
-            if( compare( H[j], H[(j-1)/2]) < 0){
-                Swap(j,(j-1)/2, H);
+        System.out.println(toString());
+        int j = 0;
+
+        while (hasLeft(j,H) ){
+
+            int min_val_of_branch= 2*j;
+            
+            if( hasRight(j,H)){
+                if ( compare( ((E)H[2*j]) , ((E) H[(2*j)+1]) ) > 0 ) min_val_of_branch = (2*j)+1;
             }
-            j++;
-        }
 
+            if( compare( H[min_val_of_branch], H[j]) >= 0){
+               break;
+            }
+
+            Swap(j,min_val_of_branch,H);
+            j  = min_val_of_branch;
+           
+        }
+        
+        last--;
+        return min;
 
 
     }
