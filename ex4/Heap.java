@@ -48,32 +48,31 @@ public class Heap <E extends Comparable<E>> {
     // NOTE: must use casting to class (E)
     //
 	
+    public void Swap(int e1, int e2, Object H[]){
+
+        E temp = (E) H[e1];
+        H[e1] = (E) H[e2];
+        H[e2] = (E) temp;
+        
+    }
     
     public void insert(E e) throws HeapException {
 
         if (last == capacity) throw new HeapException("overflow");
 
         H[last] = e;
-        System.out.println((E) H[last]);
-        System.out.println((E) H[last/2]);
-        System.out.println(compare((E) H[last], (E) H[last/2]));
         
 
-        //while( ((E) H[last]).compareTo((E) H[last/2]) < 0){
-          
-        Swap((E) H[last], (E) H[last/2]);
-        System.out.println((E) H[last]);
-        System.out.println((E) H[last/2]);
-           
-           //System.out.println("Stuck");
-           //System.out.println(((E) H[last]).compareTo((E) H[last/2]) < 0);
-           
-        //}
+        int j = last;
+
+        while (j > 0){
+            if( compare( H[j], H[(j-1)/2]) < 0){
+                Swap(j,(j-1)/2, H);
+            }
+            j--;
+        }
+
         last++;
-
-
-
-
 
     }		
     //
@@ -83,7 +82,23 @@ public class Heap <E extends Comparable<E>> {
     
     @SuppressWarnings("unchecked")
     public E removeMin() throws HeapException {
-	return null;
+
+        if (H.isEmpty()){throw exception};
+
+	    E min =  (E) H[0];
+
+        H[0] = (E) H[last];
+
+        j = 0;
+        while (j < last){
+            if( compare( H[j], H[(j-1)/2]) < 0){
+                Swap(j,(j-1)/2, H);
+            }
+            j++;
+        }
+
+
+
     }
     //
     // removes and returns smallest element of the heap
@@ -92,14 +107,11 @@ public class Heap <E extends Comparable<E>> {
     //       see min() above
     //
 
-    public void Swap(E e1, E e2){
-        E temp = e1;
-        e1 = e2;
-        e2 = temp;
+    
+
+     
 
 
-
-    }
     public String toString(){
         StringBuilder output = new StringBuilder();
 
