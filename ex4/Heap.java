@@ -76,7 +76,7 @@ public class Heap <E extends Comparable<E>> {
 
         int j = last;
 
-        while (j > 0){
+        while (j > 1){
             if( compare( H[j], H[(j-1)/2]) < 0){
                 Swap(j,(j-1)/2, H);
             }
@@ -93,18 +93,19 @@ public class Heap <E extends Comparable<E>> {
     //
     
     @SuppressWarnings("unchecked")
-    public E removeMin() throws HeapException {
-
+    public E removeMin() throws HeapException, ArrayIndexOutOfBoundsException {
 
         if (isEmpty()) throw new HeapException("underflow");
 
-	    E min =  (E) H[0];
+        
 
-        H[0] = (E) H[last-1];
-
-        System.out.println(toString());
-        int j = 0;
-
+	    E min =  (E) H[1];
+        H[1] = (E) H[last-1];
+        H[last] = null;
+        last--;
+        
+        try{
+        int j = 1;
         while (hasLeft(j,H) ){
 
             int min_val_of_branch= 2*j;
@@ -113,17 +114,21 @@ public class Heap <E extends Comparable<E>> {
                 if ( compare( ((E)H[2*j]) , ((E) H[(2*j)+1]) ) > 0 ) min_val_of_branch = (2*j)+1;
             }
 
-            if( compare( H[min_val_of_branch], H[j]) >= 0){
-               break;
+            if( compare( H[min_val_of_branch], H[j]) > 0){
+               return min;
             }
 
             Swap(j,min_val_of_branch,H);
             j  = min_val_of_branch;
            
         }
-        
-        last--;
+        }catch(ArrayIndexOutOfBoundsException e){}
         return min;
+        
+
+        
+        
+
 
 
     }
@@ -142,8 +147,8 @@ public class Heap <E extends Comparable<E>> {
     public String toString(){
         StringBuilder output = new StringBuilder();
 
-        for (int i = 0; i < last; i++ ) {
-            if (i != 0 ) output.append(","); 
+        for (int i = 1; i <= last; i++ ) {
+            if (i > 1 ) output.append(","); 
             E e = (E) H[i];
             output.append(e);
             
