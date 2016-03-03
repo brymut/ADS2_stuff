@@ -48,7 +48,7 @@ public class Heap <E extends Comparable<E>> {
     // NOTE: must use casting to class (E)
     //
 	
-    public void Swap(int e1, int e2, Object H[]){
+    public void swap(int e1, int e2, Object H[]){
 
         E temp = (E) H[e1];
         H[e1] = (E) H[e2];
@@ -67,23 +67,25 @@ public class Heap <E extends Comparable<E>> {
         else return true;
     }
     
+    
     public void insert(E e) throws HeapException {
 
         if (last == capacity) throw new HeapException("overflow");
 
+        last++;
         H[last] = e;
-        
+
 
         int j = last;
+        while( j > 1){
 
-        while (j > 1){
-            if( compare( H[j], H[(j-1)/2]) < 0){
-                Swap(j,(j-1)/2, H);
+            if ( compare( (E)H[j], (E) H[(j/2)] ) < 0){
+                swap(j, j/2, H);
             }
             j--;
         }
 
-        last++;
+
 
     }
 
@@ -91,43 +93,48 @@ public class Heap <E extends Comparable<E>> {
     // inserts e into the heap
     // throws exception if heap overflow
     //
+    private void bubbleDown () throws ArrayIndexOutOfBoundsException{
+        try{
+        int j = 1;
+        int posOfMin = 2*j; 
+
+        while( hasLeft(j,H)){
+
+            // find min
+            if (hasRight(j,H)) {
+                
+                if ( compare ( (E) H[2*j], (E) H[(2*j)+1] ) > 0 ) posOfMin = (2*j)+1;
+            }
+            // compare the min to the parent
+            if( compare ((E) H[j], (E) H[posOfMin]) <= 0  ){
+                break;
+            }
+            swap(j,posOfMin,H);
+            j = posOfMin;
+            
+        }
+        } catch (ArrayIndexOutOfBoundsException e){}
+    }
     
+
+
     @SuppressWarnings("unchecked")
     public E removeMin() throws HeapException, ArrayIndexOutOfBoundsException {
 
         if (isEmpty()) throw new HeapException("underflow");
 
-        
 
-	    E min =  (E) H[1];
-        H[1] = (E) H[last-1];
+        E min = (E) H[1];
+
+        H[1] = H[last];
+
         H[last] = null;
-        last--;
-        
-        try{
-        int j = 1;
-        while (hasLeft(j,H) ){
 
-            int min_val_of_branch= 2*j;
-            
-            if( hasRight(j,H)){
-                if ( compare( ((E)H[2*j]) , ((E) H[(2*j)+1]) ) > 0 ) min_val_of_branch = (2*j)+1;
-            }
+        last --;
 
-            if( compare( H[min_val_of_branch], H[j]) > 0){
-               return min;
-            }
+        bubbleDown();
 
-            Swap(j,min_val_of_branch,H);
-            j  = min_val_of_branch;
-           
-        }
-        }catch(ArrayIndexOutOfBoundsException e){}
         return min;
-        
-
-        
-        
 
 
 
@@ -147,14 +154,15 @@ public class Heap <E extends Comparable<E>> {
     public String toString(){
         StringBuilder output = new StringBuilder();
 
-        for (int i = 1; i <= last; i++ ) {
-            if (i > 1 ) output.append(","); 
-            E e = (E) H[i];
-            output.append(e);
+        for (int i = 1; i <= last ; i++) {
+
+            if (i > 1) output.append(",");
+            E item = (E) H[i];
+            output.append(item);            
             
         }
 
-	return output.toString();
+        return output.toString();        
     }
     //
     // outputs the entries in H in the order H[1] to H[last]
