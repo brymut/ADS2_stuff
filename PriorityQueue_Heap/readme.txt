@@ -1,5 +1,5 @@
 
-      Exercise 4: Heap<E>  (ASSESSED)
+      Exercise 4: Heap<E>  
       -------------------------------
 
 Description:
